@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rsp stat="ok">
+<auth>
+	<token>72157622657564879-8264e9a7fe1ec583</token>
+	<perms>delete</perms>
+	<user nsid="7807221@N08" username="rossmason" fullname="" />
+</auth>
+</rsp>
