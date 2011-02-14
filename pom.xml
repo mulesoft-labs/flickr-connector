@@ -4,7 +4,7 @@
     <groupId>org.mule.module</groupId>
     <artifactId>mule-module-flickr</artifactId>
     <packaging>cloud-connector</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <name>Cloud Connector for Flickr</name>
     <description>A Flickr Cloud Connector that allows users to search and download photos.</description>
 
