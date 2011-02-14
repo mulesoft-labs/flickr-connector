@@ -39,7 +39,7 @@ public interface FlickrAuthenticationIBean extends FlickrBase
     public void init(@UriParam("api_key") String apikey, @PropertyParam("secret_key") String secretKey, @UriParam("format") FlickrBase.FORMAT format);
 
     @State
-    public void init(@UriParam("api_key") String apikey, @PropertyParam("secret_key") String secretKey, @UriParam("format") FlickrBase.FORMAT format, @ReturnType() Class returnType);
+    public void init(@UriParam("api_key") String apikey, @PropertyParam("secret_key") String secretKey, @UriParam("format") FlickrBase.FORMAT format, @ReturnType() Class<?> returnType);
 
 
     @Call(uri = "http://api.flickr.com/services/rest/?method=flickr.auth.getFrob&api_key={api_key}&api_sig={api_sig}")

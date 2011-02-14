@@ -61,7 +61,7 @@ public interface FlickrSearchIBean extends FlickrBase
      * Init the FlickrIBean with your API key and response data format
      * @param apikey your Flickr API key. One can be obtained from here: http://www.flickr.com/services/apps/create/apply
      * @param format The response data format to request from the Flickr API
-
+     */
     @State
     public void init(@UriParam("api_key") String apikey, @UriParam("format") FlickrBase.FORMAT format);
 
@@ -71,10 +71,9 @@ public interface FlickrSearchIBean extends FlickrBase
      * @param format The response data format to request from the Flickr API
      * @param returnType The Java return type to use when return the response to the caller. he Flickr API supports
      * XML and JSON, valid values are {@link String}, @link org.mule.module.json.JsonData}, {@link org.w3c.dom.Document}.
-
+     */
     @State
-    public void init(@UriParam("api_key") String apikey, @UriParam("format") FlickrBase.FORMAT format, @ReturnType() Class returnType);
-    */
+    public void init(@UriParam("api_key") String apikey, @UriParam("format") FlickrBase.FORMAT format, @ReturnType() Class<?> returnType);
 
     /**
      * Return a list of photos with one or more matching tags. Only photos visible to the calling user will be returned. To return
@@ -125,6 +124,8 @@ public interface FlickrSearchIBean extends FlickrBase
      *                 {@link org.mule.module.json.JsonData}, {@link org.w3c.dom.Document}.
      * @return The result of the search in the format defined by param <T>
      * @throws CallException if there is an error making the request or the request returns an error
+     */
+	@Operation(name="pagedSearch")
     @Call(uri = "http://www.flickr.com/services/rest?method=flickr.photos.search&api+key={api_key}&text={text}&per_page={per_page}&page={page}&format={format}&nojsoncallback=1", properties = {HTTP.GET})
     public <T> T search(@UriParam("text") String text, @Optional @UriParam("per_page") Integer perPage, @Optional @UriParam("page") Integer page) throws CallException;
 
@@ -256,10 +257,10 @@ public interface FlickrSearchIBean extends FlickrBase
      *               {@link org.mule.module.json.JsonData}, {@link org.w3c.dom.Document}.
      * @return The result of the search in the format defined by param <T>, if authentication fails if the API key does not validate.
      * @throws CallException if there is an error making the request or the request returns an error
-
+	 */
+    @Operation(name="advancedSearch")
     @Call(uri = "http://www.flickr.com/services/rest?method=flickr.photos.search&api+key={api_key}&tags={tags}&tags_mode={tags_mode}&text={text}&min_upload_date={min_upload_date}&max_upload_date={max_upload_date}&min_taken_date={min_taken_date}&max_taken_date={max_taken_date}&license={license}&sort={sort}&privacy_filter={privacy_filter}&bbox={bbox}&accuracy={accuracy}&safe_search={safe_search}&content_type={content_type}&machine_tags={machine_tags}&machine_tags_mode={machine_tags_mode}&group_id={group_id}&contacts={contacts}&woe_id={woe_id}&place_id={place_id}&media={media}&has_geo={has_geo}&geo_context={geo_context}&lat={lat}&lon={lon}&radius={radius}&radius_units={radius_units}&is_commons={is_commons}&extras={extras}&per_page=10&format={format}&nojsoncallback={nojsoncallback}", properties = {HTTP.GET})
     public <T> T search(@UriParam("user_id, tags, tags_mode, text, min_upload_date, max_upload_date, min_taken_date, max_taken_date, license, sort, privacy_filter, bbox, accuracy, safe_search, content_type, machine_tags, machine_tags_mode, group_id, contacts, woe_id, place_id, media, has_geo, geo_context, lat, lon, radius, radius_units, is_commons, extras, page, per_page, nojsoncallback") Map params) throws CallException;
-     */
 
     /**
      * Loads a Photo from Flickr as a {@link java.awt.image.BufferedImage}
@@ -281,8 +282,9 @@ public interface FlickrSearchIBean extends FlickrBase
      * @throws org.ibeans.api.CallException
      *          if there is a problem parsing the node, (which is very unlikely)
      */
-    @Template("http://static.flickr.com/#[xpath2:@server]/#[xpath2:@id]_#[xpath2:@secret]_{image_size}.{image_type}")
-    public URL getPhotoURL(@Body Node photoNode) throws CallException;
+    @Operation
+    @Template("http://static.flickr.com/{server}/{id}_{secret}_{image_size}.{image_type}")
+    public URL getPhotoURL(@UriParam("server") String server, @UriParam("id") String id, @UriParam("secret") String secret) throws CallException;
 
     /**
      * Will construct a Photo URL from a photo node retuend from a search
@@ -293,8 +295,7 @@ public interface FlickrSearchIBean extends FlickrBase
      * @return the new URL
      * @throws org.ibeans.api.CallException
      *          if there is a problem parsing the node, (which is very unlikely)
-
+     */
     @Template("http://static.flickr.com/#[xpath2:@server]/#[xpath2:@id]_#[xpath2:@secret]_{image_size}.{image_type}")
     public URL getPhotoURL(@Body Node photoNode, @UriParam("image_size") FlickrBase.IMAGE_SIZE size, @UriParam("image_type") FlickrBase.IMAGE_TYPE type) throws CallException;
-    */
 }

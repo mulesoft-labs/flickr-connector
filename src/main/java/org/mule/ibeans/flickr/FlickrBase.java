@@ -135,5 +135,5 @@ public interface FlickrBase
     };
 
     @ReturnType
-    public static final Class DEFAULT_RETURN_TYPE = String.class;
+    public static final Class<?> DEFAULT_RETURN_TYPE = String.class;
 }
