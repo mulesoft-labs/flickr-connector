@@ -6,7 +6,7 @@
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-        http://www.mulesoft.org/schema/mule/flickr http://www.mulesoft.org/schema/mule/flickr/${pom.version}/mule-flickr.xsd">
+        http://www.mulesoft.org/schema/mule/flickr http://www.mulesoft.org/schema/mule/flickr/1.0/mule-flickr.xsd">
 
     <flickr:config apiKey="ded7fc9a3f760745944c8d4931772ea0" secretKey="HELLO" format="JSON"/>
 

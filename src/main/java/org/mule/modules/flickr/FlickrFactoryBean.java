@@ -12,12 +12,27 @@ package org.mule.modules.flickr;
 import org.mule.cloudconnect.ibeans.IBeanFactoryBean;
 import org.mule.ibeans.flickr.FlickrBase;
 import org.mule.ibeans.flickr.FlickrIBean;
+import org.mule.tools.cloudconnect.annotations.Property;
 
 public class FlickrFactoryBean extends IBeanFactoryBean<FlickrIBean>
 {
 
+    /**
+     * API Key
+     */
+    @Property
     private String apiKey;
+
+    /**
+     * Secret Key
+     */
+    @Property
     private String secretKey;
+
+    /**
+     * Format of the Flickr response
+     */
+    @Property
     private FlickrIBean.FORMAT format;
 
     @Override

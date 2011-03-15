@@ -14,7 +14,7 @@
         <mule.version>3.1.0</mule.version>
         <ibeans.version>1.3</ibeans.version>
         <ibeans.ri.version>1.0</ibeans.ri.version>
-		<cloudconnect.version>2.0.3</cloudconnect.version>
+		<cloudconnect.version>2.0.11-SNAPSHOT</cloudconnect.version>
     </properties>
 
     <developers>
@@ -92,6 +92,9 @@
                 <artifactId>mule-cloud-connector-maven-plugin</artifactId>
                 <version>${cloudconnect.version}</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <schemaVersion>1.0</schemaVersion>
+                </configuration>
             </plugin>
         </plugins>
 		<testResources> 
