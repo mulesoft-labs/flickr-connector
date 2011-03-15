@@ -74,7 +74,7 @@ public interface FlickrSearchIBean extends FlickrBase
      * @param apikey     your Flickr API key. One can be obtained from here: http://www.flickr.com/services/apps/create/apply
      * @param format     The response data format to request from the Flickr API
      * @param returnType The Java return type to use when return the response to the caller. he Flickr API supports
-     *                   XML and JSON, valid values are {@link String}, @link org.mule.module.json.JsonData}, {@link org.w3c.dom.Document}.
+     *                   XML and JSON, valid values are String, org.mule.module.json.JsonData, org.w3c.dom.Document.
      */
     @State
     public void init(@UriParam("api_key") String apikey, @UriParam("format") FlickrBase.FORMAT format, @ReturnType() Class<?> returnType);
@@ -83,6 +83,10 @@ public interface FlickrSearchIBean extends FlickrBase
      * Return a list of photos with one or more matching tags. Only photos visible to the calling user will be returned. To return
      * private or semi-private photos, the caller must be authenticated with 'read' permissions, and have permission to
      * view the photos. Unauthenticated calls will only return public photos.
+     *
+     * {@code
+     * <flickr:search-tags tags="mulesoft"/>
+     * }
      *
      * @param tags    A comma-delimited list of tags. Photos with one or more of the tags listed will be returned.
      * @param tagMode Either 'any' for an OR combination of tags, or 'all' for an AND combination. Defaults to 'any' if not specified.
@@ -102,6 +106,10 @@ public interface FlickrSearchIBean extends FlickrBase
      * private or semi-private photos, the caller must be authenticated with 'read' permissions, and have permission to
      * view the photos. Unauthenticated calls will only return public photos.
      *
+     * {@code
+     * <flickr:search text="mulesoft" page="1" perPage="20"/>
+     * }
+     *
      * @param text    A free text search. Photos who's title, description or tags contain the text will be returned.
      * @param perPage Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.
      * @param page    The page of results to return. If this argument is omitted, it defaults to 1.
@@ -120,6 +128,11 @@ public interface FlickrSearchIBean extends FlickrBase
      * Return a list of photos matching some criteria. Only photos visible to the calling user will be returned. To return
      * private or semi-private photos, the caller must be authenticated with 'read' permissions, and have permission to
      * view the photos. Unauthenticated calls will only return public photos.
+     *
+     * {@code
+     * <flickr:advanced-search userId="34234534" tags="mulesoft"
+     *                         lat="-34.56" lon="78.3"/>
+     * }
      *
      * @param userId          The NSID of the user who's photo to search. If this parameter isn't passed then everybody's public photos will be searched. A value of "me" will search against the calling user's photos for authenticated calls.
      * @param tags            A comma-delimited list of tags. Photos with one or more of the tags listed will be returned.
@@ -153,10 +166,7 @@ public interface FlickrSearchIBean extends FlickrBase
      * @param extras          A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o
      * @param perPage         Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.
      * @param page            The page of results to return. If this argument is omitted, it defaults to 1.
-     * @param <T>             The return type class defined in the {@link FlickrIBean#init(String, org.mule.ibeans.flickr.FlickrBase.FORMAT, Class)} or
-     *                        {@link FlickrIBean#init(String, org.mule.ibeans.flickr.FlickrBase.FORMAT)} or {@link FlickrIBean#init(String, String, org.mule.ibeans.flickr.FlickrBase.FORMAT, Class)}
-     *                        methods or uses the default return type {@link FlickrBase#DEFAULT_RETURN_TYPE}. The Flickr API supports XML and JSON, valid values are {@link String},
-     *                        {@link org.mule.module.json.JsonData}, {@link org.w3c.dom.Document}.
+     * @param <T>             The Flickr API supports XML and JSON, valid values are String, org.mule.module.json.JsonData, org.w3c.dom.Document.
      * @return The result of the search in the format defined by param <T>, if authentication fails if the API key does not validate.
      * @throws CallException if there is an error making the request or the request returns an error
      */
@@ -197,9 +207,13 @@ public interface FlickrSearchIBean extends FlickrBase
                         @Parameter(optional = true) @Optional @UriParam("nojsoncallback") String noJsonCallback) throws CallException;
 
     /**
-     * Loads a Photo from Flickr as a {@link java.awt.image.BufferedImage}
+     * Loads a Photo from Flickr as a java.awt.image.BufferedImage
      *
-     * @param photoUrl the Photo URL to download.  Typically this method is used in conjunction with {@link #getPhotoURL(org.w3c.dom.Node, FlickrSearchIBean.IMAGE_SIZE, FlickrSearchIBean.IMAGE_TYPE)} or {@link #getPhotoURL(org.w3c.dom.Node)}
+     * {@code
+     * <flickr:get-photo photoUrl="http://www.flickr.com/photos/orangeacid/459207903/"/>
+     * }
+     *
+     * @param photoUrl the Photo URL to download.
      * @return a BufferedImage representation of the photo
      * @throws org.ibeans.api.CallException
      */
@@ -210,7 +224,13 @@ public interface FlickrSearchIBean extends FlickrBase
     /**
      * Will construct a Photo URL from a photo node retuend from a search
      *
-     * @param photoNode the node to construct the URL from
+     * {@code
+     * <flickr:get-photo id="2636" server="2" secret="a123456"/>
+     * }
+     *
+     * @param server Server under which the photo is hosted
+     * @param id Id of the photo
+     * @param secret Secret
      * @return the new URL
      * @throws org.ibeans.api.CallException if there is a problem parsing the node, (which is very unlikely)
      */

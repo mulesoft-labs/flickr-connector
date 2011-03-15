@@ -78,6 +78,12 @@ Return a list of photos with one or more matching tags. Only photos visible to t
 private or semi-private photos, the caller must be authenticated with 'read' permissions, and have permission to
 view the photos. Unauthenticated calls will only return public photos.
 
+
+
+    
+    <flickr:search-tags tags="mulesoft"/>
+    
+
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
@@ -90,6 +96,12 @@ Search
 Return a list of photos matching some criteria. Only photos visible to the calling user will be returned. To return
 private or semi-private photos, the caller must be authenticated with 'read' permissions, and have permission to
 view the photos. Unauthenticated calls will only return public photos.
+
+
+
+    
+    <flickr:search text="mulesoft" page="1" perPage="20"/>
+    
 
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
@@ -104,6 +116,13 @@ Advanced Search
 Return a list of photos matching some criteria. Only photos visible to the calling user will be returned. To return
 private or semi-private photos, the caller must be authenticated with 'read' permissions, and have permission to
 view the photos. Unauthenticated calls will only return public photos.
+
+
+
+    
+    <flickr:advanced-search userId="34234534" tags="mulesoft"
+                            lat="-34.56" lon="78.3"/>
+    
 
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
@@ -145,23 +164,35 @@ view the photos. Unauthenticated calls will only return public photos.
 Get Photo
 ---------
 
-Loads a Photo from Flickr as a {@link java.awt.image.BufferedImage}
+Loads a Photo from Flickr as a java.awt.image.BufferedImage
+
+
+
+    
+    <flickr:get-photo photoUrl="http://www.flickr.com/photos/orangeacid/459207903/"/>
+    
 
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
-|photoUrl| the Photo URL to download.  Typically this method is used in conjunction with {@link #getPhotoURL(org.w3c.dom.Node, FlickrSearchIBean.IMAGE_SIZE, FlickrSearchIBean.IMAGE_TYPE)} or {@link #getPhotoURL(org.w3c.dom.Node)}|no||
+|photoUrl| the Photo URL to download.|no||
 
 Get Photo U R L
 ---------------
 
 Will construct a Photo URL from a photo node retuend from a search
 
+
+
+    
+    <flickr:get-photo id="2636" server="2" secret="a123456"/>
+    
+
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
-|server||no||
-|id||no||
-|secret||no||
+|server| Server under which the photo is hosted|no||
+|id| Id of the photo|no||
+|secret| Secret|no||
 
 
