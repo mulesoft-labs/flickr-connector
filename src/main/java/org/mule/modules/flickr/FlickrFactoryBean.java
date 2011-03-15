@@ -32,7 +32,7 @@ public class FlickrFactoryBean extends IBeanFactoryBean<FlickrIBean>
     /**
      * Format of the Flickr response
      */
-    @Property
+    @Property(optional=true, defaultValue = "JSON")
     private FlickrIBean.FORMAT format;
 
     @Override

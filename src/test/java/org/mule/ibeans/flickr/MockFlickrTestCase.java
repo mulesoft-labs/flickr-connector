@@ -24,8 +24,8 @@ public class MockFlickrTestCase extends FlickrTestCase
     @Before
     public void initMockData() throws Exception
     {
-        when(getFlickr().search(SEARCH_TERM)).thenAnswer(withXmlData("FlickrTestCase-testFlickr-response1.xml", getFlickr()));
-        when(getFlickr().search(BAD_SEARCH_TERM)).thenAnswer(withXmlData("FlickrTestCase-testFlickrError-response1.xml", getFlickr()));
+        when(getFlickr().search(SEARCH_TERM, 1, 10)).thenAnswer(withXmlData("FlickrTestCase-testFlickr-response1.xml", getFlickr()));
+        when(getFlickr().search(BAD_SEARCH_TERM, 1, 10)).thenAnswer(withXmlData("FlickrTestCase-testFlickrError-response1.xml", getFlickr()));
         when(getFlickr().getFrob()).thenAnswer(withXmlData("FlickrTestCase-testAuth-response1.xml", getFlickr()));
         when(getFlickr().checkAuthToken((String)iBeansContext.getConfig().get("flickr.auth.token"))).thenAnswer(withXmlData("FlickrTestCase-testAuth-response2.xml", getFlickr()));
     }

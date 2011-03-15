@@ -55,7 +55,7 @@ Here is detailed list of all the configuration attributes:
 |name|Give a name to this configuration so it can be later referenced by config-ref.|yes||
 |apiKey|API Key|no|
 |secretKey|Secret Key|no|
-|format|Format of the Flickr response|no|
+|format|Format of the Flickr response|yes|
 
 
 
