@@ -32,7 +32,7 @@ Add the connector's maven repo to your pom.xml:
     </repositories>
 
 Add the connector as a dependency to your project. This can be done by adding
-the following under the <dependencies> element in the pom.xml file of the
+the following under the dependencies element in the pom.xml file of the
 application:
 
     <dependency>
