@@ -11,7 +11,7 @@
     <properties>
         <status>useful</status>
         <bundled>true</bundled>
-        <mule.version>3.1.0</mule.version>
+        <mule.version>4.1.1</mule.version>
         <ibeans.version>1.3</ibeans.version>
         <ibeans.ri.version>1.0</ibeans.ri.version>
 		<cloudconnect.version>2.0.12</cloudconnect.version>
